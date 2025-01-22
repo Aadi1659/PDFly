@@ -5,7 +5,8 @@ import { Box, Button, ButtonGroup, Stack, Text, Container, Flex, Input, Textarea
 import { FaCopy } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
 
-export const BASE_URL = import.meta.env.MODE === "development" ? "http://127.0.0.1:5000/upload" : "/";
+export const BASE_URL = "http://127.0.0.1:5000/upload"
+export const RENDER_URL = "https://pdfly-yjr8.onrender.com/upload"
 
 function App() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -40,7 +41,7 @@ function App() {
     setIsProcessing(true); // Disable the button and show the "Please wait..." message
 
     try {
-      const response = await axios.post(BASE_URL, formData, {
+      const response = await axios.post(RENDER_URL, formData, { //change the RENDER_URL to BASE_URL for local use
         headers: {
           'Content-Type': 'multipart/form-data',
         },
