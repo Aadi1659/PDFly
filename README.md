@@ -15,6 +15,8 @@ Key Features:
   <li>Interactive UI: Designed with Chakra UI for a visually appealing and responsive interface.</li>
   <li>File Management: View the name of your uploaded file and track your actions effortlessly.</li>
   <li>Whether you’re a business professional, student, or researcher, PDFly simplifies handling PDF content, saving time and enhancing productivity.</li>
+  <li>Light and Dark Mode - Easily toggle between light and dark mode with the touch of a button</li>
+  <li>Responsive - Works well in all kinds of devices - laptops, tablets and phones</li>
 </ul>
 
 ## How to Run?
