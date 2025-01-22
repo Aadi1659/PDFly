@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+venv*/
+.Python
+bin/
+include/
+lib/
+lib64/
+pip-selfcheck.json
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.pyc
+
+# Environment variables
+.env
+
+# api key
+openrouterapi.txt
+
+# Compiled Python files
+*.pyc
+
+# Dependency directories
+node_modules/
+/dist/
