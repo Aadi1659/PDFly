@@ -24,8 +24,13 @@ Make sure you have npm installed and have an OpenRouter API key.
 Steps: <br>
 Download the source code <br>
 ```
+cd frontend
+npm install
+npm run build
+cd ..
 cd backend
-pip install flask flask-cors
-pip app.py 
+pip install flask flask-cors PyPDF2 openai
+python app.py 
 ```
+Note: Use a virtual env in backend folder.
 
