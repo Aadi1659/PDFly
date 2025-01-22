@@ -5,6 +5,8 @@ import { Box, Button, ButtonGroup, Stack, Text, Container, Flex, Input, Textarea
 import { FaCopy } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
 
+export const BASE_URL = import.meta.env.MODE === "development" ? "http://127.0.0.1:5000/upload" : "/";
+
 function App() {
   const [pdfFile, setPdfFile] = useState(null);
   const [apiKey, setApiKey] = useState('');
@@ -38,7 +40,7 @@ function App() {
     setIsProcessing(true); // Disable the button and show the "Please wait..." message
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/upload', formData, {
+      const response = await axios.post(BASE_URL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
