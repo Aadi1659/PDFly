@@ -5,7 +5,8 @@ from openai import OpenAI
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+#Uncomment this while running locally
+#CORS(app)
 
 frontend_folder = os.path.join(os.getcwd(),"..","frontend")
 dist_folder = os.path.join(frontend_folder,"dist")
