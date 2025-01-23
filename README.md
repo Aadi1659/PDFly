@@ -1,25 +1,37 @@
-# PDFly - A Simple PDF Extractor and Summarizer
+# 📄 PDFly: Your Intelligent PDF Processing Solution
 
-PDFly is a powerful and user-friendly web application designed to streamline PDF text extraction and summarization. With a clean interface and seamless functionality, PDFly allows users to effortlessly upload PDF documents, extract their content, and receive concise summaries powered by advanced AI technology.
+**PDFly** is a modern web application that transforms PDF documents into actionable insights. Combining robust text extraction with AI-powered analysis, it handles both digital and scanned PDFs through:
 
-![Xnip2025-01-22_20-47-32](https://github.com/user-attachments/assets/68b9d168-304b-4656-be1a-1d0847b9bbcb)
+- **Optical Character Recognition (OCR)** for image-based documents  
+- **LLM-Powered Summarization** via OpenRouter's model ecosystem  
+- **Metadata & Structure Preservation** during processing  
+
+![Xnip2025-01-23_22-41-41](https://github.com/user-attachments/assets/7b5abc2e-1862-430d-9640-dbefe92d4106)
+
 
 ### Demo Video
-https://github.com/user-attachments/assets/94604dc3-142f-46ed-b730-21f2716c9f98
 
-Key Features:
+
+https://github.com/user-attachments/assets/1fcc71a9-4571-4abc-b5ed-e1a6706fd359
+
+
+
+### ✨ Key Features
+
 <ul>
-  <li>Effortless PDF Uploads: Simply upload your PDF files with a click of a button.</li>
-  <li>AI-Powered Summarization: Leverage cutting-edge LLMs to generate summaries of complex documents for quick comprehension.</li>
-  <li>Real-Time Feedback: Visual indicators like "Processing..." ensure a smooth user experience during lengthy operations.</li>
-  <li>Interactive UI: Designed with Chakra UI for a visually appealing and responsive interface.</li>
-  <li>File Management: View the name of your uploaded file and track your actions effortlessly.</li>
-  <li>Whether you’re a business professional, student, or researcher, PDFly simplifies handling PDF content, saving time and enhancing productivity.</li>
-  <li>Light and Dark Mode - Easily toggle between light and dark mode with the touch of a button</li>
-  <li>Responsive - Works well in all kinds of devices - laptops, tablets and phones</li>
+  <li><strong>Universal PDF Processing</strong> - Extract text from both digital and scanned PDF documents</li>
+  <li><strong>AI-Powered Insights</strong> - Generate structured summaries using cutting-edge LLMs via OpenRouter API</li>
+  <li><strong>Smart OCR Integration</strong> - Automatic text recognition for image-based PDFs using Tesseract</li>
+  <li><strong>Metadata Extraction</strong> - Retrieve document author, creation date, and other key metadata</li>
+  <li><strong>Cross-Platform Ready</strong> - Optimized for macOS, Windows, and Linux deployments</li>
+  <li><strong>Secure Processing</strong> - Temporary file handling and automatic cleanup after processing</li>
+  <li><strong>Rate Limited API</strong> - Built-in protection against abuse with Flask-Limiter</li>
+  <li><strong>Modern UI Support</strong> - Pre-configured to serve Vue/React frontends from /dist directory</li>
+  <li><strong>Production-Ready</strong> - Dockerized configuration with proper dependency management</li>
+  <li><strong>Hybrid Extraction</strong> - Combines native PDF parsing with OCR fallback for maximum compatibility</li>
 </ul>
 
-## How to Run?
+### How to Run?
 
 Make sure you have npm installed and have an OpenRouter API key.
 
@@ -31,8 +43,8 @@ npm install
 npm run build
 cd ..
 cd backend
-pip install flask flask-cors PyPDF2 openai
+pip install -r requirements.txt
 python app.py 
 ```
-Note: Use a virtual env in backend folder.
+Note: Use a virtual env in backend folder and install all packages in the requirements.txt folder
 
