@@ -5,7 +5,7 @@ import { Box, Button, Stack, Text, Container, Flex, Input, Textarea, Table, Tbod
 import { FaCopy } from "react-icons/fa";
 
 export const BASE_URL = "http://127.0.0.1:5000/api/process-pdf"
-export const RENDER_URL = "https://pdfly-yjr8.onrender.com/upload"
+export const RENDER_URL = "https://pdfly-yjr8.onrender.com/upload/"
 
 
 function App() {
