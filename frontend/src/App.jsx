@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-import { Box, Button, ButtonGroup, Stack, Text, Container, Flex, Input, Textarea } from '@chakra-ui/react'
+import { Box, Button, Stack, Text, Container, Flex, Input, Textarea, Table, Tbody, Tr, Td,} from '@chakra-ui/react'
 import { FaCopy } from "react-icons/fa";
-import { IoMdDownload } from "react-icons/io";
 
-export const BASE_URL = "http://127.0.0.1:5000/upload"
+export const BASE_URL = "http://127.0.0.1:5000/api/process-pdf"
 export const RENDER_URL = "https://pdfly-yjr8.onrender.com/upload"
+
 
 function App() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -15,7 +15,10 @@ function App() {
   const [summarisedText, setSummarisedText] = useState('');
   const [isProcessing, setIsProcessing] = useState(false); // State to manage processing status
   const [pdfFileName, setPdfFileName] = useState('');
-
+  const [wordCount, setWordCount] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const [metadata, setMetadata] = useState({});
+  const [responseStatus, setResponseStatus] = useState(false);
 
   const handleFileChange = (event) => {
     setPdfFile(event.target.files[0]);
@@ -29,8 +32,8 @@ function App() {
   };
 
   const handleSubmit = async () => {
-    if (!pdfFile || !apiKey) {
-      alert('Please provide both a PDF file and an API key.');
+    if (!pdfFile) {
+      alert('Please provide a PDF file!');
       return;
     }
 
@@ -41,14 +44,18 @@ function App() {
     setIsProcessing(true); // Disable the button and show the "Please wait..." message
 
     try {
-      const response = await axios.post(RENDER_URL, formData, { //change the RENDER_URL to BASE_URL for local use
+      const response = await axios.post(RENDER_URL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      setExtractedText(response.data.extracted_text);
-      setSummarisedText(response.data.summarised_text);
+      setExtractedText(response.data.text);
+      setSummarisedText(response.data.summary);
+      setPageCount(response.data.page_count);
+      setWordCount(response.data.word_count);
+      setMetadata(response.data.metadata);
+      setResponseStatus(true)
     } catch (error) {
       setExtractedText('Error extracting text from PDF');
       setSummarisedText('Error summarizing text');
@@ -61,6 +68,22 @@ function App() {
     navigator.clipboard.writeText(text);
     alert("Copied to clipboard");
   }
+
+  const formatPDFDate = (dateString) => {
+    if (!dateString || !dateString.startsWith('D:')) return dateString;
+    
+    // Extract date components from D:YYYYMMDDHHmmSS format
+    const year = dateString.substring(2, 6);
+    const month = dateString.substring(6, 8);
+    const day = dateString.substring(8, 10);
+    const hour = dateString.substring(10, 12);
+    const minute = dateString.substring(12, 14);
+    const second = dateString.substring(14, 16);
+
+    // Create a formatted date string
+    const date = new Date(year, month - 1, day, hour, minute, second);
+    return date.toLocaleString();
+  };
 
   return (
     <Stack className="App" minH={'100vh'} >
@@ -123,7 +146,10 @@ function App() {
       
     
       <Flex direction={'column'} m={10} gap={5} >
-        
+        <Flex direction={'column'} gap={5} m={5}  >
+          {responseStatus && <Text  fontWeight={'bold'} fontSize={'2xl'}  textAlign={'center'} >Word Count: {wordCount}</Text>}
+          {responseStatus && <Text  fontWeight={'bold'} fontSize={'2xl'}  textAlign={'center'} >Page Count: {pageCount}</Text>}
+        </Flex>
         <Flex direction={'column'} >
           <Flex gap={5} mb={2}>
             <Text fontWeight={'bold'} fontSize={'2xl'} >Extracted Text</Text>
@@ -166,6 +192,39 @@ function App() {
               readOnly
             />
         </Flex>
+        
+        <Flex direction={'column'}>
+          <Flex gap={5} mb={2}>
+            <Text fontWeight={'bold'} fontSize={'2xl'}>Metadata</Text>
+            <Button 
+              onClick={() => handleCopy(JSON.stringify(metadata))} 
+              colorScheme="pink"
+              variant={'outline'}
+              _hover={{transform: "scale(1.05)"}}
+            >
+              <FaCopy size={20} />
+            </Button>
+          </Flex>
+          <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
+            <Table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <Tbody>
+                {Object.entries(metadata).map(([key, value]) => (
+                  <Tr key={key}>
+                    <Td style={{ padding: '12px', borderBottom: '1px solid #E2E8F0', fontWeight: 'bold' }}>
+                      {key}
+                    </Td>
+                    <Td style={{ padding: '12px', borderBottom: '1px solid #E2E8F0' }}>
+                      {(key === 'CreationDate' || key === 'ModDate') 
+                        ? formatPDFDate(value?.toString())
+                        : value?.toString() || 'N/A'}
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </Box>
+        </Flex>
+
       </Flex>
       </Container>
       
