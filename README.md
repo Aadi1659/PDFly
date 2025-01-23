@@ -4,7 +4,9 @@
 
 - **Optical Character Recognition (OCR)** for image-based documents  
 - **LLM-Powered Summarization** via OpenRouter's model ecosystem  
-- **Metadata & Structure Preservation** during processing  
+- **Metadata & Structure Preservation** during processing
+
+## ACCESS THE LIVE PROJECT HERE: https://pdfly-yjr8.onrender.com
 
 ![Xnip2025-01-23_22-41-41](https://github.com/user-attachments/assets/7b5abc2e-1862-430d-9640-dbefe92d4106)
 
